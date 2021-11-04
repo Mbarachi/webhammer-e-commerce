@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import FormInput from '../form-input/FormInput'
 import CustomButton from '../custom-button/CustomButton'
-import { signInWithGoogle } from '../../firebase/firebase.utils'
+import {auth, signInWithGoogle } from '../../firebase/firebase.utils'
 
 import './sign-in.styles.scss'
 
@@ -10,10 +10,16 @@ const SignIn = () => {
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
 
-const handleSubmit = (e) => {
+const handleSubmit =  async (e) => {
     e.preventDefault()
-    setEmail('')
-    setPassword('')
+    
+    try{
+        await auth.signInWithEmailAndPassword(email,password)
+        setEmail('')
+        setPassword('')
+    }catch(error){
+        console.log(error)
+    }
 }
 
 const handleChangeEmail = (event) => {
