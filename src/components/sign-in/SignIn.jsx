@@ -18,6 +18,7 @@ const handleSubmit = (e) => {
 
 const handleChangeEmail = (event) => {
     const {value} = event.target
+    console.log(value)
     setEmail(value)
 }
 
